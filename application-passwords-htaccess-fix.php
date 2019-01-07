@@ -3,7 +3,7 @@
  * Plugin Name: Application Passwords .htaccess Fix
  * Plugin URI: https://github.com/mistercorey
  * Description: This plugin persists a customization to .htaccess that the Application Passwords plugin requires on some server configurations.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Corey Salzano
  * Author URI: https://profiles.wordpress.org/salzano
  * Text Domain: application-passwords-htaccess
@@ -17,14 +17,7 @@ defined( 'ABSPATH' ) OR exit;
 class Application_Passwords_Htaccess_Fix{
 
 	function add_hooks() {
-
-		//is the Application Passwords plugin running?
-		if( ! class_exists( 'Application_Passwords' ) ) {
-			//no, abort
-			return;
-		}
-
-		add_filter( 'mod_rewrite_rules', array( $this, 'maybe_add_http_authorization' ) );
+		add_filter( 'mod_rewrite_rules', array( $this, 'maybe_add_http_authorization' ), 9999 );
 	}
 
 	/**
@@ -34,6 +27,13 @@ class Application_Passwords_Htaccess_Fix{
 	 * @param string $rules The content that gets written to .htaccess that powers WordPress.
 	 */
 	function maybe_add_http_authorization( $rules ) {
+
+
+		//is the Application Passwords plugin running?
+		if( ! class_exists( 'Application_Passwords' ) ) {
+			//no, abort
+			return;
+		}
 
 		/**
 		 * Detect that a web request with an authorization header doesn't deliver
@@ -51,6 +51,7 @@ class Application_Passwords_Htaccess_Fix{
 		$url = esc_url_raw( rest_url() ) . '2fa/v1/test-basic-authorization-header';
 		$response = wp_remote_post( $url, $args );
 		if( isset( $response['body'] ) && isset( $response['body']->PHP_AUTH_USER ) ) {
+
 			/**
 			 * There is no problem, this server is passing Basic Authentication
 			 * headers just fine.
@@ -68,6 +69,7 @@ class Application_Passwords_Htaccess_Fix{
 
 		$position = strpos( $rules, $after ) + strlen( $after );
 		if( false === $position ) {
+
 			//Perhaps something else is filtering the output of mod_rewrite_rules()
 			return $rules;
 		}
