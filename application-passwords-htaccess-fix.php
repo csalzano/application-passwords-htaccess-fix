@@ -1,9 +1,9 @@
 <?php
 /**
  * Plugin Name: Application Passwords .htaccess Fix
- * Plugin URI: https://github.com/mistercorey
+ * Plugin URI: https://github.com/csalzano
  * Description: This plugin persists a customization to .htaccess that the Application Passwords plugin requires on some server configurations.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Corey Salzano
  * Author URI: https://profiles.wordpress.org/salzano
  * Text Domain: application-passwords-htaccess

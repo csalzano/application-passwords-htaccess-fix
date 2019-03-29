@@ -2,8 +2,8 @@
 Contributors: salzano
 Tags: application passwords, rest API, htaccess, PHP_AUTH_USER
 Requires at least: 3.0.1
-Tested up to: 5.0.2
-Stable tag: 1.0.1
+Tested up to: 5.1.0
+Stable tag: 1.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -27,6 +27,9 @@ Users of Application Passwords who see a warning message near the Application Pa
 
 
 == Changelog ==
+
+= 1.0.2 =
+* [Fixed] Update my github profile URL to match my changed user name
 
 = 1.0.1 =
 * [Changed] Check for the presence of Application Passwords when the rewrite rules are being generated rather than when adding hooks.
